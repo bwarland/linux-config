@@ -82,8 +82,7 @@ keys = [
         desc="Spawn a command using a prompt widget"),
 
     # Keybindings to applications
-    Key([mod], "e", lazy.spawn("emacsclient -c")),
-    Key([mod], "m", lazy.spawn("midori")),
+    Key([mod], "e", lazy.spawn("emacs")),
     Key([mod], "g", lazy.spawn("google-chrome-stable")),
 ]
 
