@@ -64,6 +64,10 @@ keys = [
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 
+    # Keyboard layout
+    Key([mod], "F12", lazy.spawn('setxkbmap -layout no')),
+    Key([mod], "F11", lazy.spawn('setxkbmap -layout gb')),
+    
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -82,12 +86,18 @@ keys = [
         desc="Spawn a command using a prompt widget"),
 
     # Keybindings to applications
+    Key([mod], "c", lazy.spawn("evince")),
     Key([mod], "e", lazy.spawn("emacsclient -c")),
-    Key([mod], "m", lazy.spawn("midori")),
     Key([mod], "g", lazy.spawn("google-chrome-stable")),
+    Key([mod], "k", lazy.spawn("clementine")),
+    Key([mod], "m", lazy.spawn("midori")),
+    Key([mod], "s", lazy.spawn("xfce4-screenshooter")),
+    Key([mod], "r", lazy.spawn("rambox")),
+    Key([mod], "u", lazy.spawn("thunar")),
+    Key([mod], "t", lazy.spawn("teams")),
 ]
 
-groups = [Group(i) for i in "12345"]
+groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend([
