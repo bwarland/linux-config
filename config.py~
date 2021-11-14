@@ -82,11 +82,12 @@ keys = [
         desc="Spawn a command using a prompt widget"),
 
     # Keybindings to applications
-    Key([mod], "e", lazy.spawn("emacs")),
+    Key([mod], "e", lazy.spawn("emacsclient -c")),
+    Key([mod], "m", lazy.spawn("midori")),
     Key([mod], "g", lazy.spawn("google-chrome-stable")),
 ]
 
-groups = [Group(i) for i in "12345"]
+groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend([
