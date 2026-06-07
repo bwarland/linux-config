@@ -1,0 +1,87 @@
+conky.config = {
+    -- Window Settings
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+   
+    -- Positioning (This pushes it away from your icons)
+    alignment = 'top_right',
+    gap_x = 80,
+    gap_y = 80,
+   
+    -- Performance & Visuals
+    double_buffer = true,
+    update_interval = 2.0,
+    use_xft = true,
+    font = 'DejaVu Sans Mono:size=14',
+    draw_shades = false,
+    default_color = 'white',
+}
+
+conky.text = [[
+${color grey}System:$color $nodename
+${color grey}Uptime:$color $uptime
+
+${color grey}CALENDAR ${hr 2}
+${execpi 3600 bash -c '
+M=$(date +%-m)
+Y=$(date +%Y)
+
+cal $M $Y > /tmp/cal1
+cal $((M+1)) $Y > /tmp/cal2
+cal $((M+2)) $Y > /tmp/cal3
+cal $((M+3)) $Y > /tmp/cal4
+
+paste /tmp/cal1 /tmp/cal2
+echo
+paste /tmp/cal3 /tmp/cal4
+'}
+
+System:$color $nodename
+${color grey}Uptime:$color $uptime
+${color grey}CPU Usage:$color $cpu% ${cpubar 4}
+${color grey}RAM Usage:$color $mem/$memmax - $memperc%
+${membar 4}
+
+${color lightgrey}NETWORK ${hr 2}
+${color grey}IP Address: $color ${addr wlp0s20f3}
+- ${color}Public IP:$color ${execi 3600 curl -s https://icanhazip.com}
+${color grey}Down:$color ${downspeed wlan0} k/s ${alignr}${color grey}Up:$color ${upspeed wlan0} k/s
+${downspeedgraph wlp0s20f3 25,120 000000 ff0000} ${alignr}${upspeedgraph wlp0s20f3 25,120 000000 00ff00}
+
+${color lightgrey}DISK USAGE ${hr 2}
+${color grey}/ home:$color ${fs_used /home}/${fs_size /home} ${fs_bar 4 /home}
+${color grey}Read:$color ${diskio_read} ${alignr}${color grey}Write:$color ${diskio_write}
+${diskiograph_read 20,120 000000 ffff00} ${alignr}${diskiograph_write 20,120 000000 00ffff}
+
+${color grey}Battery:$color ${battery_percent BAT1}% ${battery_bar 4 BAT1}
+${color grey}Status:$color ${battery_time BAT1}
+
+${color lightgrey}SENSORS ${hr 2}
+${color grey}CPU Temp:$color ${hwmon 3 temp 1}°C
+${color grey}Fan Speed:$color ${hwmon 1 fan 1} RPM
+
+${color lightgrey}TOP CPU PROCESSES ${hr 2}
+${color grey}Name              PID     CPU%   MEM%
+${color white}${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+${color white}${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+${color white}${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+${color white}${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
+${color white}${top name 5} ${top pid 5} ${top cpu 5} ${top mem 5}
+${color white}${top name 6} ${top pid 6} ${top cpu 6} ${top mem 6}
+${color white}${top name 7} ${top pid 7} ${top cpu 7} ${top mem 7}
+
+${color lightgrey}TOP MEMORY PROCESSES ${hr 2}
+${color grey}Name              PID     CPU%   MEM%
+${color white}${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
+${color white}${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
+${color white}${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+${color white}${top_mem name 4} ${top_mem pid 4} ${top_mem cpu 4} ${top_mem mem 4}
+${color white}${top_mem name 5} ${top_mem pid 5} ${top_mem cpu 5} ${top_mem mem 5}
+${color white}${top_mem name 6} ${top_mem pid 6} ${top_mem cpu 6} ${top_mem mem 6}
+${color white}${top_mem name 7} ${top_mem pid 7} ${top_mem cpu 7} ${top_mem mem 7}${color grey}
+
+]]
